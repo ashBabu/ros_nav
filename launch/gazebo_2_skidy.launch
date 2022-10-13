@@ -1,0 +1,8 @@
+<launch>
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find ros_nav)/launch/gazebo_1_world.launch"> </include>
+
+  <!-- Spawn skidy into Gazebo -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find ros_nav)/urdf/skidy_1_basic.urdf -urdf -z 1 -model skidy_bot" />
+
+</launch>
