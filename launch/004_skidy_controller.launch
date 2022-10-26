@@ -1,0 +1,16 @@
+<launch>
+  <arg name="model" default="002_skidy_gazebo.urdf" />
+  <arg name="rvizconfig" default="$(find ros_nav)/rviz/001_skidy_in_rviz.rviz" />
+
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find ros_nav)/launch/003_gazebo_skidy.launch">
+    <arg name="model" value="$(arg model)"/>
+    <arg name="rvizconfig" value="$(arg rvizconfig)"/>
+  </include>
+
+  <rosparam command="load" file="$(find ros_nav)/config/joints.yaml"/>
+  <rosparam file="$(find ros_nav)/config/gazebo_ros_control_params.yaml" command="load"/>
+  <node name="skidy_robot" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_state_controller"/>
+
+</launch>

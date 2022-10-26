@@ -1,0 +1,13 @@
+<launch>
+  <arg name="model" default="002_skidy_gazebo.urdf" />
+  <arg name="rvizconfig" default="$(find ros_nav)/rviz/001_skidy_in_rviz.rviz" />
+
+  <param name="robot_description" command="$(find xacro)/xacro $(find ros_nav)/urdf/$(arg model)"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true"/>
+
+</launch>
